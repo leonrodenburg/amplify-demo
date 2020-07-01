@@ -1,68 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Amplify Demo
 
-## Available Scripts
+This repository contains the Amplify 'Getting Started' application with some additions to make
+it a bit more interesting. You should be able to deploy this app in your own account using the
+following steps:
 
-In the project directory, you can run:
+## 1. Install Amplify CLI
 
-### `yarn start`
+If you have not installed the Amplify CLI, you need to install that first:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+npm install -g @aws-amplify/cli
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Make sure you have recent enough version of NodeJS and NPM.
 
-### `yarn test`
+## 2. Configure Amplify CLI (optional)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If you have not used the AWS CLI before and did not configure any profiles, you can do that
+through the AWS Amplify CLI:
 
-### `yarn build`
+```
+amplify configure
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This will ask you to log in and create an IAM user in your account, so Amplify can access
+your cloud resources on your behalf. Because using root user credentials is considered a
+no-go, Amplify will use the IAM user way. If you already have an IAM user with access keys
+for your day-to-day work, and have configured this in a profile in `~/.aws/config`, you can
+skip this step.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 3. Initialize repo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Because the current environment is pinned to the Amplify app deployed in my account, you
+will run into authorization issues if you try to deploy now using Amplify. What you need
+to do is re-initialize the Amplify project and add an environment of your own, that uses
+your AWS profile:
 
-### `yarn eject`
+```
+npm install
+amplify init
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+When asked if you want to reuse an existing environment, select 'No'. This will ask you a
+few questions about your new environment.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 4. Publish app!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+That's it! The rest should be ready to go:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+amplify publish
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Answer all the promps with 'Yes'. After some time, you will be presented with a GraphQL
+endpoint and a URL where your frontend is hosted. The rest is magic.
